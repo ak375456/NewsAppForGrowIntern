@@ -14,16 +14,15 @@ class NewsRepositoryImpl @Inject constructor(
 ) : NewsRepository {
     override suspend fun getNews(): Either<NetworkError, List<Article>> {
         return Either.catch {
-            // Accessing the articles from the News object returned by the API
             val response = newsApi.getArticles(
                 query = "all",
                 from = "2024-11-05",
                 sortBy = "publishedAt"
             )
-            response.articles // Return the list of articles
+            response.articles
         }.mapLeft {
             Log.d("ERRORRR", "getNews: $it")
-            it.toNetworkError() // Map the error to a network error
+            it.toNetworkError()
         }
     }
 }
