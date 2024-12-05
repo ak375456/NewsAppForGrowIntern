@@ -52,7 +52,6 @@ fun NewsCard(
             .fillMaxWidth()
             .padding(16.dp)
     ) {
-        // Image at the top
         AsyncImage(
             model = new.urlToImage ?: "",
             contentDescription = null,
@@ -107,7 +106,7 @@ fun NewsCard(
 
         Row(
             modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.End // Align both items to the right
+            horizontalArrangement = Arrangement.End
         ) {
             val context = LocalContext.current
             val intent = remember { Intent(Intent.ACTION_VIEW, Uri.parse(new.url)) }
@@ -155,8 +154,8 @@ fun NewsContent(state: NewsViewState) {
 }
 
 fun formatPublishedAt(publishedAt: String): String {
-    val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.getDefault()) // Assuming ISO 8601 format
-    val outputFormat = SimpleDateFormat("dd MMM yyyy", Locale.getDefault()) // Date format without time
+    val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.getDefault())
+    val outputFormat = SimpleDateFormat("dd MMM yyyy", Locale.getDefault())
 
     val date = inputFormat.parse(publishedAt) ?: return "Invalid date"
     return outputFormat.format(date)
